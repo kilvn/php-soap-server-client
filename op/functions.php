@@ -50,6 +50,8 @@ interface iface extends icommon,ifunc{}
  * */
 abstract class common implements iface
 {
+	const CHECK_KEYCODE = false; //是否校验keycode
+	
 	/**
 	 * @todo 获得毫秒级的时间戳
 	 * @return string $返回转换好的时间戳
@@ -227,21 +229,21 @@ abstract class method extends common {
 	 * @return array|mixed|string $返回验证状态
 	 */
 	private static function validate($_info, $_json=true){
-		if (is_string($_info)){
+		if(is_string($_info)){
 			$_info = json_decode($_info, true);
 		}
 
-		if ( ! is_array($_info)){
+		if(!is_array($_info)){
 			return method::output(0,'参数不正确！','601',$_json);
 		}
 
 		$_info = method::addslash_deep($_info);
 		
-		if ( ! isset($_info['keycode'])){
+		if(!isset($_info['keycode'])){
 			return method::output(0,'不存在验证码！','602',$_json);
 		}
 
-		if ( ! method::check_keycode($_info['keycode'])){
+		if(CHECK_KEYCODE && !method::check_keycode($_info['keycode'])){
 			return method::output(0,'非法调用接口！','603',$_json);
 		}
 
@@ -277,7 +279,7 @@ abstract class method extends common {
 	 * @return bool $返回 true or false
 	 */
 	private static function check_keycode($keycode){
-		$ckg = "gzRN53VWRF9BYUXo";
+		$ckg = "test_keycode"; //这里可以动态获取项目配置文件的验证keycode
 		
 		if ($keycode != $ckg){
 			return false;

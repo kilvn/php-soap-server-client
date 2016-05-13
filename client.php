@@ -48,7 +48,7 @@
          */
         $array = array(
             "pid" => 1,"accountid" => 131785,
-            "keycode" => "gzRN53VWRF9BYUXo",
+            "keycode" => "test_keycode", //CHECK_KEYCODE为true时，才生效，目的是为了校验约定的keycode是否一致，防止恶意访问接口。
         );
 
         $_info = json_encode($array);
