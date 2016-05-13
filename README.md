@@ -1,3 +1,5 @@
+#首先，得确定环境开启了soap协议
+
 /op/soap.wsdl       #是xml格式的对soap函数的注册声明
 
 /op/stdserver.php   #引入soap，动态注册接口函数

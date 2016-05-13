@@ -2,9 +2,8 @@
 
 /**
  * 接口定义(公共方法)
- * @author	 HJ
- * @date	2012-12-10
- * */
+ * Interface icommon
+ */
 interface icommon
 {
 	public static function mk_time();
@@ -27,9 +26,8 @@ interface icommon
 
 /**
  * 接口定义(功能方法)
- * @author	 HJ
- * @date	2012-12-10
- * */
+ * Interface ifunc
+ */
 interface ifunc
 {
 	/*测试方法*/
@@ -38,16 +36,14 @@ interface ifunc
 
 /**
  * 接口定义(多个继承)
- * @author	 HJ
- * @date	2012-12-10
- * */
+ * Interface iface
+ */
 interface iface extends icommon,ifunc{}
 
 /**
  * 通用方法类 (抽象类)
- * @author	 HJ
- * @date	2012-09-28
- * */
+ * Class common
+ */
 abstract class common implements iface
 {
 	const CHECK_KEYCODE = false; //是否校验keycode
