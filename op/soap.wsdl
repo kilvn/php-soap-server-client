@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<definitions name="soap" targetNamespace="urn:soap" xmlns:tns="http://v2.fax.service.sag.bnet.cn/" xmlns:typens="urn:soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+	
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://v2.fax.service.sag.bnet.cn/"  xmlns:tns="http://v2.fax.service.sag.bnet.cn/">
+
+		  <xsd:complexType name="returnArr">
+			<xsd:sequence>
+			  <xsd:element minOccurs="0" maxOccurs="1" name="flag" type="xsd:int"/>
+			  <xsd:element minOccurs="0" maxOccurs="1" name="msg" type="xsd:string"/>
+			  <xsd:element minOccurs="0" maxOccurs="1" name="info" type="xsd:string"/>
+			</xsd:sequence>
+		  </xsd:complexType>
+
+		  <xsd:complexType name="ArrayOfMember">
+			<xsd:sequence>
+				<xsd:element minOccurs="0" maxOccurs="unbounded" name="Member" nillable="true" type="tns:returnArr"/>
+			</xsd:sequence>		
+		  </xsd:complexType>
+
+		</xsd:schema>
+	</wsdl:types>
+
+	<message name="doAct">
+		<part name="operate" type="xsd:string"/>
+		<part name="args" type="xsd:string"/>
+	</message>
+	<message name="doActResponse">
+		<!--<part name="parameters" type="tns:returnArr"/>-->
+		<part name="parameters" type="xsd:string"/>
+	</message>
+	
+	<portType name="functionsPortType">
+		
+		<operation name="doAct">
+			<documentation>
+			doAct
+			</documentation>
+			<input message="typens:doAct"/> 
+			<output message="typens:doActResponse"/>
+		</operation>
+		
+	</portType>
+
+	<binding name="functionsBinding" type="typens:functionsPortType">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		
+		<operation name="doAct">
+			<soap:operation soapAction="urn:functionsAction"/>
+			<input>
+				<soap:body namespace="urn:soap" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</input>
+			<output>
+				<soap:body namespace="urn:soap" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</output>
+		</operation>
+		
+	</binding>
+
+	<service name="soapService">
+		<port name="functionsPort" binding="typens:functionsBinding">
+			<soap:address location="http://127.0.0.1:80/soap/op/stdserver.php?wsdl"/>
+		</port>
+	</service>
+</definitions>
