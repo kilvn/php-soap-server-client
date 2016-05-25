@@ -8,7 +8,7 @@
 
 /op/functions.php   #接口函数文件，所有的函数写在method类里面
 
-/client.php         #是客户端，模拟发起soap请求并且打印，用于开发调试
+/client.php         #是客户端，模拟发起soap或post请求并且打印返回值，用于开发调试
 
 #需要注意的是 soap.wsdl 尾部和 client.php 引用的soap链接IP、端口和目录要正确，不正确会导致soap通讯失败。
 
